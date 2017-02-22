@@ -1,0 +1,20 @@
+{
+  "name": "e-market",
+  "version": "1.0.0",
+  "description": "An online market.",
+  "main": "index.js",
+  "scripts": {
+    "start" : "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Eduardo Uribe <eduardogoz91@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "express": "^4.14.1",
+    "mysql": "^2.13.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
