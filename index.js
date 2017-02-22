@@ -67,6 +67,60 @@ app.post('/user', (req, res) => {
   })
 })
 
+app.post('/pedido', (req, res) => {
+  let query = 'INSERT INTO PEDIDOS SET ?'
+  pool.getConnection((err, connection) => {
+    if (err) res.status(500).send({ message: `Ocurrio un error en el servidor ${err}` })
+    else console.log(`Se obutvo exitosamente una conexion a la base de datos`)
+    connection.query(query, req.body, (err, rows) => {
+      connection.release()
+      console.log(req.body)
+      if (err) res.status(500).send({ message: `Ocurrio un error en el sevidor al intentar hacer tu pedido ${err}` })
+      else res.status(200).send({ message: `Se ha creado tu pedido con exito` })
+    })
+  })
+})
+
+app.get('/pedido', (req, res) => {
+  let query = 'SELECT * FROM Pedidos'
+  pool.getConnection((err, connection) => {
+    if (err) res.status(500).send(`Ocurrio un error al obtener los pedidos ${err}`)
+    else console.log(`Se obtuvo exitosamente una conexion a la base de datos`)
+    connection.query(query, (err, rows) => {
+      connection.release()
+      if (err) res.status(500).send(`Error en el servidor ${err}`)
+      else res.status(200).send(rows)
+    })
+  })
+})
+
+app.post('/dispositivo', (req, res) => {
+  let query = 'INSERT INTO Dispositivo SET ?'
+  pool.getConnection((err, connection) => {
+    if (err) res.status(500).send({ message: `Ocurrio un error en el servidor ${err}` })
+    else console.log(`Se obutvo exitosamente una conexion a la base de datos`)
+    connection.query(query, req.body, (err, rows) => {
+      connection.release()
+      console.log(req.body)
+      if (err) res.status(500).send({ message: `Ocurrio un error en el sevidor al intentar hacer tu pedido ${err}` })
+      else res.status(200).send({ message: `Se ha agregado tu dispositivo con exito` })
+    })
+  })
+})
+
+app.get('/dispositivo', (req, res) => {
+  let query = 'SELECT * FROM Dispositivo'
+  pool.getConnection((err, connection) => {
+    if (err) res.status(500).send(`Ocurrio un error al obtener los dispositivos ${err}`)
+    else console.log(`Se obtuvo exitosamente una conexion a la base de datos`)
+    connection.query(query, (err, rows) => {
+      connection.release()
+      if (err) res.status(500).send(`Error en el servidor ${err}`)
+      else res.status(200).send(rows)
+    })
+  })
+})
+
 app.listen(config.port, () => {
   console.log(`Servidor corriendo en el puerto ${config.port}`)
 })
