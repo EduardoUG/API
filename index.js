@@ -1,5 +1,4 @@
 'use strict'
-
 const express = require('express')
 const bodyParser = require('body-parser')
 const config = require('./config')
@@ -12,6 +11,7 @@ app.use(bodyParser.json())
 
 app.post('/product', (req, res) => { contrl.postProducto(req, res, pool) })
 app.get('/product', (req, res) => { contrl.getProducto(req, res, pool) })
+app.put('/product', (req, res) => { contrl.putProducto(req, res, pool) })
 app.post('/user', (req, res) => { contrl.postUser(req, res, pool) })
 app.get('/user', (req, res) => { contrl.getUser(req, res, pool) })
 app.post('/pedido', (req, res) => { contrl.postPedido(req, res, pool) })

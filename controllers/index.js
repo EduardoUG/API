@@ -3,11 +3,25 @@
 function postProducto (req, res, pool) {
   let query = 'INSERT INTO Productos SET ?'
   pool.getConnection((err, connection) => {
-    if (err) res.status(500).send(`Ocurrio un error al obtener los usuarios ${err}`)
+    if (err) res.status(500).send(`Ocurrio un error al conectar a la base de datos: ${err}`)
     else console.log(`Se obtuvo exitosamente una conexion a la base de datos`)
     connection.query(query, req.body, (err, rows) => {
+      console.log(req.body)
       if (err) res.status(500).send(`Error en el servidor ${err}`)
-      else res.status(200).send(`Se ha ingresado con exito el proudcto`)
+      else res.status(200).send({ message: `Se ha ingresado con exito el proudcto` })
+    })
+  })
+}
+
+function putProducto (req, res, pool) {
+  let query = 'UPDATE Productos SET ? where ID_Producto = 1'
+  pool.getConnection((err, connection) => {
+    if (err) res.status(500).send(`Ocurrio un error al conectar a la base de datos: ${err}`)
+    else console.log(`Se obtuvo exitosamente una conexion a la base de datos`)
+    connection.query(query, req.body, (err, rows) => {
+      console.log(req.body)
+      if (err) res.status(500).send(`Error en el servidor ${err}`)
+      else res.status(200).send({ message: `Se ha actualizado con exito el proudcto` })
     })
   })
 }
@@ -108,6 +122,7 @@ function postDispositivo (req, res, pool) {
 
 module.exports = ({
   postProducto,
+  putProducto,
   getProducto,
   postUser,
   getUser,
